@@ -1,0 +1,26 @@
+int prov(wchar_t *p, wchar_t*sent){
+    if(wcsstr(sent, p) == NULL) return 0;
+    else{
+        if(wcsstr(sent, p) != NULL) return 1 ;
+    }
+}
+void para(struct Text *txt) {
+    for (int i = 0; i < txt->n; i++) {
+        int k = 0;
+        int c = 0;
+
+        wchar_t *word;
+        wchar_t *pr;
+        wchar_t *p = wcstok(txt->text[i]->str, L" ,;()", &pr);
+        while (p != NULL) {
+
+            k = prov(p, txt->text[i]->str);
+            c += k;
+            if (c == 1){
+                c = 0;
+                printf("%ls ", p);
+            }
+            p = wcstok(NULL, L" ", &pr);
+        }
+    }
+}
